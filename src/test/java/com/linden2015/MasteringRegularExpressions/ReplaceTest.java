@@ -1,17 +1,20 @@
 package com.linden2015.MasteringRegularExpressions;
 
-import org.junit.Test;
+import com.jcabi.matchers.RegexMatchers;
 import java.util.regex.Pattern;
-import static org.junit.Assert.*;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 public class ReplaceTest {
+
     @Test
     public void replace_all() {
-        assertEquals(
-            "Jeff Friedl jeffrey Friedl",
+        MatcherAssert.assertThat(
             Pattern.compile("\\bjeff\\b", Pattern.CASE_INSENSITIVE)
                 .matcher("jeff Friedl jeffrey Friedl")
-                .replaceAll("Jeff")
+                .replaceAll("Jeff"),
+            Matchers.equalTo("Jeff Friedl jeffrey Friedl")
         );
     }
 }

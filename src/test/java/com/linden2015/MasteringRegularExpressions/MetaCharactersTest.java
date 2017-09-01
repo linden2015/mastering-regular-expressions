@@ -1,14 +1,25 @@
 package com.linden2015.MasteringRegularExpressions;
 
+import com.jcabi.matchers.RegexMatchers;
+import java.util.regex.Pattern;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 public class MetaCharactersTest {
+
     @Test
     public void java() {
         // A word character is [a-zA-Z0-9_]
-        assertTrue("_".matches("\\w"));
+        MatcherAssert.assertThat(
+            "_".matches("\\w"),
+            Matchers.is(true)
+        );
+
         // Matching a single backslash
-        assertTrue("\\".matches("\\\\"));
+        MatcherAssert.assertThat(
+            "\\".matches("\\\\"),
+            Matchers.is(true)
+        );
     }
 }

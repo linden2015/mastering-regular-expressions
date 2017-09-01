@@ -1,23 +1,27 @@
 package com.linden2015.MasteringRegularExpressions;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import com.jcabi.matchers.RegexMatchers;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 public class RunCaseInsentitively {
     @Test
     public void test() {
-        assertEquals(
-            true,
+        MatcherAssert.assertThat(
             Pattern.compile("^abc$", Pattern.CASE_INSENSITIVE)
                 .matcher("ABC")
-                .matches()
+                .matches(),
+            Matchers.is(true)
         );
-        assertEquals(
-            true,
+
+        MatcherAssert.assertThat(
             Pattern.compile("^à$", Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE)
                 .matcher("À")
-                .matches()
+                .matches(),
+            Matchers.is(true)
         );
     }
 }

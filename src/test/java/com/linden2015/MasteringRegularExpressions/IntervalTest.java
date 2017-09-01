@@ -1,24 +1,58 @@
 package com.linden2015.MasteringRegularExpressions;
 
-import static org.junit.Assert.*;
-import org.junit.Test;
+import com.jcabi.matchers.RegexMatchers;
 import java.util.regex.Pattern;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 public class IntervalTest {
+
     @Test
     public void intervals() {
-        assertEquals(true, Pattern.compile("\\d{4,5}").matcher("1111").matches());
-        assertEquals(true, Pattern.compile("\\d{4,5}").matcher("11111").matches());
+        MatcherAssert.assertThat(
+            "1111".matches("\\d{4,5}"),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            "11111".matches("\\d{4,5}"),
+            Matchers.is(true)
+        );
+
         // Only min specific
-        assertEquals(true, Pattern.compile("\\d{4}").matcher("1111").matches());
-        assertEquals(true, Pattern.compile("\\d{4,}").matcher("1111").matches());
+        MatcherAssert.assertThat(
+            "1111".matches("\\d{4}"),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            "1111".matches("\\d{4,}"),
+            Matchers.is(true)
+        );
+
         // Min and max the same
-        assertEquals(true, Pattern.compile("\\d{5,5}").matcher("11111").matches());
+        MatcherAssert.assertThat(
+            "11111".matches("\\d{5,5}"),
+            Matchers.is(true)
+        );
+
         // Min 0 times
-        assertEquals(true, Pattern.compile("abc\\d{0}").matcher("abc").matches());
-        assertEquals(true, Pattern.compile("abc\\d{0,1}").matcher("abc2").matches());
+        MatcherAssert.assertThat(
+            "abc".matches("abc\\d{0}"),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            "abc2".matches("abc\\d{0,1}"),
+            Matchers.is(true)
+        );
+
         // Group
-        assertEquals(true, Pattern.compile("(10){3}").matcher("101010").matches());
-        assertEquals(false, Pattern.compile("(10){3}").matcher("1010").matches());
+        MatcherAssert.assertThat(
+            "101010".matches("(10){3}"),
+            Matchers.is(true)
+        );
+        MatcherAssert.assertThat(
+            "1010".matches("(10){3}"),
+            Matchers.is(false)
+        );
     }
 }

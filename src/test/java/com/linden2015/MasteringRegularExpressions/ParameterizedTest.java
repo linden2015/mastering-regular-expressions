@@ -1,16 +1,19 @@
 package com.linden2015.MasteringRegularExpressions;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import com.jcabi.matchers.RegexMatchers;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.regex.Pattern;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
 import org.junit.runner.RunWith;
-import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
+import org.junit.runners.Parameterized;
+import org.junit.Test;
 
 @RunWith(Parameterized.class)
 public class ParameterizedTest {
+
     @Parameters
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
@@ -45,7 +48,9 @@ public class ParameterizedTest {
     }
 
     private boolean expected;
+
     private String pattern;
+
     private String target;
 
     public ParameterizedTest(boolean expected, String pattern, String target) {
@@ -56,6 +61,8 @@ public class ParameterizedTest {
 
     @Test
     public void test() {
-        assertEquals(expected, Pattern.matches(pattern, target));
+        MatcherAssert.assertThat(
+            Pattern.matches(pattern, target), Matchers.equalTo(expected)
+        );
     }
 }

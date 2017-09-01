@@ -1,8 +1,10 @@
 package com.linden2015.MasteringRegularExpressions;
 
-import org.junit.Test;
+import com.jcabi.matchers.RegexMatchers;
 import java.util.regex.Pattern;
-import static org.junit.Assert.assertTrue;
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+import org.junit.Test;
 
 public class WordBoundariesTest {
     /**
@@ -11,9 +13,25 @@ public class WordBoundariesTest {
     @Test
     public void that_dang() {
         String line = "That dang-tootin' #@!%* varmint's cost me $199.95!";
-        assertTrue(Pattern.compile("\\bThat\\b").matcher(line).find());
-        assertTrue(Pattern.compile("\\bvarmint\\b").matcher(line).find());
-        assertTrue(Pattern.compile("\\b199\\b").matcher(line).find());
-        assertTrue(Pattern.compile("\\b95\\b").matcher(line).find());
+
+        MatcherAssert.assertThat(
+            Pattern.compile("\\bThat\\b").matcher(line).find(),
+            Matchers.is(true)
+        );
+
+        MatcherAssert.assertThat(
+            Pattern.compile("\\bvarmint\\b").matcher(line).find(),
+            Matchers.is(true)
+        );
+
+        MatcherAssert.assertThat(
+            Pattern.compile("\\b199\\b").matcher(line).find(),
+            Matchers.is(true)
+        );
+
+        MatcherAssert.assertThat(
+            Pattern.compile("\\b95\\b").matcher(line).find(),
+            Matchers.is(true)
+        );
     }
 }
